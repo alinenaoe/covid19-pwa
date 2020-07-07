@@ -1,15 +1,15 @@
 import React from 'react';
-import styled from 'styled-components'
+import { StylesProvider } from '@material-ui/styles'
+import { CssBaseline } from '@material-ui/core'
+import GlobalStyle from './commons/styles/global-style'
 
 const App = () => {
 
   return (
-    <>
-      <div>
-          Hello, world!
-      </div>
- 
-    </>
+    <StylesProvider injectFirst>
+      <CssBaseline />
+      <GlobalStyle />
+    </StylesProvider>
   );
 }
 
