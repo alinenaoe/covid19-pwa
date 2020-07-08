@@ -1,11 +1,14 @@
 import React, { memo, useState, useCallback, useEffect } from 'react'
 import Api from '../../api'
 import * as S from './style';
+import Board from './components/Board'
+import Panel from './components/Panel'
 
 function Main() {
 
     const [data, setData] = useState({})
     const [country, setCountry] = useState('brazil')
+    const updateAt = new Date().toLocaleString()
 
     const getCovidData = useCallback((country) => {
         Api.getCountry(country)
@@ -16,9 +19,23 @@ function Main() {
         getCovidData(country)
     }, [getCovidData, country])
 
+    const handleChange = ( {target} ) => {
+        setCountry(target.value)
+    }
+
     return(
         <S.Container>
+            <div className="mb-2" />
+            <Panel 
+                data={data} 
+                updateAt={updateAt} 
+                onChange={handleChange} 
+                country={country} 
+                getCoviddata={getCovidData}  
+            />
+            <div className="mb-2" />
             
+            <Board data={data} />
         </S.Container>
     )
 }
